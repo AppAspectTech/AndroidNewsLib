@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidNewsLibrary</string>
+    <string name="no_data">No data available</string>
+    <string name="loadMoreData">Load more data</string>
+    <string name="news_title">News</string>
+    <string name="news_details">News Details</string>
+
+    <string name="no_internet_connection">Please Check your internet Connectivity.</string>
+
+</resources>

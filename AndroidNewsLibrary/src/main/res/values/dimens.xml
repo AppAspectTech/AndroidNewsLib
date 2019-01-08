@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text10sp">10sp</dimen>
+    <dimen name="text12sp">12sp</dimen>
+    <dimen name="text14sp">14sp</dimen>
+    <dimen name="text16sp">16sp</dimen>
+    <dimen name="text18sp">16sp</dimen>
+    <dimen name="text20sp">20sp</dimen>
+    <dimen name="text30sp">30sp</dimen>
+
+    <dimen name="padding_03">03dp</dimen>
+    <dimen name="padding_05">05dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+
+    <dimen name="margin_05">05dp</dimen>
+    <dimen name="margin_07">07dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="header_height">48dp</dimen>
+    <dimen name="img_row_left_size">68dip</dimen>
+    <dimen name="img_info_size">48dip</dimen>
+    <dimen name="img_arrow_size">32dip</dimen>
+    <dimen name="batsman_header_width_runs">30dip</dimen>
+    <dimen name="batsman_header_width_sr">50dip</dimen>
+
+    <dimen name="cardCornerRadius">7dp</dimen>
+    <dimen name="cardElevation">7dp</dimen>
+</resources>

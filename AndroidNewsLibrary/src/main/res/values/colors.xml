@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1b5ab5</color>
+    <color name="colorPrimaryDark">#1b5ab5</color>
+    <color name="colorAccent">#FFFFFF</color>
+
+    <color name="bg_main_color">#e7ebf3</color>
+    <color name="bg_gray_light_color">#efefef</color>
+    <color name="bg_dark_gray_color">#A9A9A9</color>
+    <color name="bg_black_color">#000000</color>
+    <color name="bg_white_color">#FFFFFF</color>
+    <color name="bg_devider_color">#801b5ab5</color>
+    <color name="text_black_color">#000000</color>
+    <color name="text_white_color">#FFFFFF</color>
+    <color name="text_main_color">#1b5ab5</color>
+    <color name="text_gray_color">#D3D3D3</color>
+    <color name="text_dark_gray_color">#A9A9A9</color>
+    <color name="list_focus_color">#D89F2C</color>
+    <color name="home_icon_bg_one">#1b5ab5</color>
+    <color name="fully_transparent_color">#00FFFFFF</color>
+
+</resources>
