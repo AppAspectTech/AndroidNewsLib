@@ -48,12 +48,14 @@ The library is very simple, just note that :
 ## How to use
 
 1. To use this library just add this snippet in the `application` in androidManifest.xml.
+```java
 
      // add News Feed list as well as News Details Screen
-     
-     <activity android:name="com.appaspect.news.androidnewslibrary.News_Activity"></activity>
-     
-        <activity android:name="com.appaspect.news.androidnewslibrary.News_Details_Activity"></activity>
+    
+     <activity android:name="com.appaspect.news.androidnewslibrary.News_Activity">
+     </activity>
+        <activity android:name="com.appaspect.news.androidnewslibrary.News_Details_Activity">
+         </activity>
         
         
 2. To use this library just add this snippet in the `onCreate` of your activity.
