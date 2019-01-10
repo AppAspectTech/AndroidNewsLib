@@ -64,7 +64,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
     private ArrayList<RssFeedModel> rssFeed_list=new ArrayList<RssFeedModel>();
     private WP7ProgressBar wp7progressBar;
     private RequestQueue mRequestQueue;
-
+    private boolean header_show;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -80,6 +80,8 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
            {
                str_keyword=   bundle.getString(ANL_Constant_Data.News_keyword);
                str_colorCode =   bundle.getString(ANL_Constant_Data.News_Color_Code);
+               header_show =   bundle.getBoolean(ANL_Constant_Data.Header_Show);
+
                ANL_Constant_Data.colorCode= Color.parseColor(str_colorCode);
            }
 
@@ -148,6 +150,8 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_news, container, false);
 
+        display_header(mView);
+
 
         wp7progressBar = (WP7ProgressBar)mView.findViewById(R.id.wp7progressBar);
         wp7progressBar.setIndicatorColor(ANL_Constant_Data.colorCode);
@@ -189,6 +193,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
         newsAdapter = new NewsAdapter(rssFeed_list, getActivity());
         lst_news.setAdapter(newsAdapter);
 
+        display_live_match();
 
 
 
@@ -237,7 +242,23 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
     }
 
 
+    public void  display_header(View view)
+    {
 
+        TextView txt_header= (TextView) view.findViewById(R.id.txt_header);
+        txt_header.setText(getString(R.string.news_title));
+
+        if(header_show==true)
+        {
+            txt_header.setVisibility(TextView.VISIBLE);
+        }
+        else
+        {
+            txt_header.setVisibility(TextView.GONE);
+        }
+
+
+    }
 
     public void  display_live_match()
     {

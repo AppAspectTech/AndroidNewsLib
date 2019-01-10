@@ -18,27 +18,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        try {
-//
-//            String str_tag = "News_Fragment";
-//            Bundle bundle_news=new Bundle();
-//            bundle_news.putString(ANL_Constant_Data.News_keyword,"Cricket");
-//            bundle_news.putString(ANL_Constant_Data.News_Color_Code,"#000000");
-//
-//            News_Fragment news_fragment=new News_Fragment();
-//            news_fragment.setArguments(bundle_news);
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.replace(R.id.container, news_fragment, str_tag).commit();
-//
-//
-//
-//        } catch (Exception e)
-//        {
-//
-//        }
-//
-//
+        try {
+
+            String str_tag = "News_Fragment";
+            Bundle bundle_news=new Bundle();
+            bundle_news.putString(ANL_Constant_Data.News_keyword,"Cricket");
+            bundle_news.putString(ANL_Constant_Data.News_Color_Code,"#000000");
+            bundle_news.putBoolean(ANL_Constant_Data.Header_Show,true);
+
+            News_Fragment news_fragment=new News_Fragment();
+            news_fragment.setArguments(bundle_news);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, news_fragment, str_tag).commit();
+
+
+
+        } catch (Exception e)
+        {
+
+        }
+
+
 //                try {
 //
 //            String str_tag = "News_Fragment";
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 //            Bundle bundle_news=new Bundle();
 //            bundle_news.putString(ANL_Constant_Data.News_keyword,"Cricket");
 //            bundle_news.putString(ANL_Constant_Data.News_Color_Code,"#000000");
+//            bundle_news.putBoolean(ANL_Constant_Data.Header_Show,true);
 //
 //            News_Fragment news_fragment=new News_Fragment();
 //            news_fragment.setArguments(bundle_news);

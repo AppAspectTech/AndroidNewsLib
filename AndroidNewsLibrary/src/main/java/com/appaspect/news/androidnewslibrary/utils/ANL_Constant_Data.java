@@ -20,6 +20,7 @@ public class ANL_Constant_Data {
     public static final String TAG_REQ_News = "TAG_REQ_News";
     public static final String News_keyword = "News_keyword";
     public static final String News_Color_Code = "News_Color_Code";
+    public static final String Header_Show = "Header_Show";
     public static int colorCode ;
 
     public static final SimpleDateFormat match_Date_format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);

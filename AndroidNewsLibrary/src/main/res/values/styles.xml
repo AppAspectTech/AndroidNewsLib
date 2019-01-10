@@ -1,0 +1,10 @@
+<resources>
+
+
+
+    <style name="MyCustomTabText" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/text14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>

@@ -36,7 +36,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.AppAspectTech:AndroidNewsLibrary:1.0'
+	        implementation 'com.github.AppAspectTech:AndroidNewsLibrary:1.1'
 	}
 
 ## Notes
@@ -70,6 +70,7 @@ News Screen Example:
                                 Bundle bundle_news=new Bundle();
                                 bundle_news.putString(ANL_Constant_Data.News_keyword,"Cricket");    // set News keyword for listing
                                 bundle_news.putString(ANL_Constant_Data.News_Color_Code,"#000000");   // set Header Background Color
+                                bundle_news.putString(ANL_Constant_Data.News_Color_Code,"#000000"); 
                     
                                 Intent intent_news=new Intent(this,News_Activity.class);
                                 intent_news.putExtras(bundle_news);
