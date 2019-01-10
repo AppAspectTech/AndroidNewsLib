@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
@@ -74,8 +75,8 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
     private NewsAdapter newsAdapter;
     private String mFeedTitle;
     private String mFeedLink;
-    private String mFeedDescription,str_keyword="",str_colorCode;
-
+    private String mFeedDescription,str_keyword="";
+    private boolean header_show;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,15 +88,31 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
         if(bundle_data!=null)
         {
             str_keyword=   bundle_data.getString(ANL_Constant_Data.News_keyword);
-            str_colorCode =   bundle_data.getString(ANL_Constant_Data.News_Color_Code);
-            ANL_Constant_Data.colorCode= Color.parseColor(str_colorCode);
+            ANL_Constant_Data.str_colorCode =   bundle_data.getString(ANL_Constant_Data.News_Header_BG_Color);
+            ANL_Constant_Data.str_colorCode_Text =   bundle_data.getString(ANL_Constant_Data.News_Header_Text_Color);
+            header_show =   bundle_data.getBoolean(ANL_Constant_Data.Header_Show);
+
+            ANL_Constant_Data.colorCode= Color.parseColor(ANL_Constant_Data.str_colorCode);
+            ANL_Constant_Data.colorCode_Text= Color.parseColor(ANL_Constant_Data.str_colorCode_Text);
         }
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(ANL_Constant_Data.colorCode)); // set your desired color
-        actionBar.setTitle(getString(R.string.news_title));
+
+        if(header_show)
+        {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setBackgroundDrawable(new ColorDrawable(ANL_Constant_Data.colorCode)); // set your desired color
+            actionBar.setTitle((Html.fromHtml("<font color="+ANL_Constant_Data.str_colorCode_Text+">" + getString(R.string.news_title) + "</font>")));
+        }
+        else
+        {
+            actionBar.hide();
+
+
+
+        }
+
         gson = new Gson();
 
 
@@ -354,7 +371,7 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
             wp7progressBar.setVisibility(WP7ProgressBar.VISIBLE);
             // for showing
             wp7progressBar.showProgressBar();
-
+           // String requestUrl = String.format(WebServicesURLs.Cricket_NEWS_URL_NEW_FULL,str_keyword,str_ned,str_gl,str_hl);
             String requestUrl = String.format(WebServicesURLs.Cricket_NEWS_URL_FULL,str_keyword,str_keyword,str_ned,str_gl,str_hl);
             Log.e("WebRequest_String requestUrl", " " + requestUrl);
 
@@ -722,6 +739,8 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
                                             Bundle bundle_data=new Bundle();
                                             bundle_data.putString("news_url",str_link);
                                             bundle_data.putString("news_title",str_title);
+                                            bundle_data.putBoolean(ANL_Constant_Data.Header_Show,header_show);
+
                                             Intent marketIntent = new Intent(context,News_Details_Activity.class);
                                             marketIntent.putExtras(bundle_data);
                                             startActivity(marketIntent);

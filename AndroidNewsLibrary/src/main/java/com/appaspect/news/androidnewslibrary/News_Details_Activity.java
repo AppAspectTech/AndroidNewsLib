@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ public class News_Details_Activity extends AppCompatActivity implements  SwipeRe
     private TextView txtNoData;
     private WP7ProgressBar wp7progressBar;
     private SwipeRefreshLayout srl_news_list;
-
+    private  boolean header_show;
     private Gson gson;
 
     @Override
@@ -47,10 +48,6 @@ public class News_Details_Activity extends AppCompatActivity implements  SwipeRe
 
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(ANL_Constant_Data.colorCode)); // set your desired color
-        actionBar.setTitle(getString(R.string.news_details));
         gson = new Gson();
 
 
@@ -61,11 +58,26 @@ public class News_Details_Activity extends AppCompatActivity implements  SwipeRe
         {
             str_title=bundle_data.getString("news_title");
             str_url=bundle_data.getString("news_url");
+            header_show=bundle_data.getBoolean(ANL_Constant_Data.Header_Show);
+
             Log.e("str_url ",str_url);
             Log.e("str_title ",str_title);
             actionBar.setTitle(str_title);
         }
 
+
+        if(header_show)
+        {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setBackgroundDrawable(new ColorDrawable(ANL_Constant_Data.colorCode)); // set your desired color
+            actionBar.setTitle((Html.fromHtml("<font color="+ANL_Constant_Data.str_colorCode_Text+">" + getString(R.string.news_details) + "</font>")));
+        }
+        else
+        {
+            actionBar.hide();
+
+        }
 
         try
         {

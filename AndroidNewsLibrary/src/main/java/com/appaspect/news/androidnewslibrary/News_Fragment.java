@@ -3,6 +3,7 @@ package com.appaspect.news.androidnewslibrary;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +59,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
     private String imageURL = null;
     private String mFeedTitle;
     private String mFeedLink;
-    private String mFeedDescription,str_keyword="",str_colorCode;
+    private String mFeedDescription,str_keyword="";
     private NewsAdapter newsAdapter;
     private TextView txtNoData;
     private SwipeRefreshLayout srl_news_list;
@@ -71,6 +73,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
         super.onCreate(savedInstanceState);
 
         ANL_Constant_Data.colorCode=getResources().getColor(R.color.colorPrimary);
+        ANL_Constant_Data.colorCode_Text=getResources().getColor(R.color.bg_white_color);
 
         try
         {
@@ -79,10 +82,12 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
            if(bundle!=null)
            {
                str_keyword=   bundle.getString(ANL_Constant_Data.News_keyword);
-               str_colorCode =   bundle.getString(ANL_Constant_Data.News_Color_Code);
+               ANL_Constant_Data.str_colorCode =   bundle.getString(ANL_Constant_Data.News_Header_BG_Color);
+               ANL_Constant_Data.str_colorCode_Text =   bundle.getString(ANL_Constant_Data.News_Header_Text_Color);
                header_show =   bundle.getBoolean(ANL_Constant_Data.Header_Show);
 
-               ANL_Constant_Data.colorCode= Color.parseColor(str_colorCode);
+               ANL_Constant_Data.colorCode= Color.parseColor(ANL_Constant_Data.str_colorCode);
+               ANL_Constant_Data.colorCode_Text= Color.parseColor(ANL_Constant_Data.str_colorCode_Text);
            }
 
 
@@ -245,16 +250,20 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
     public void  display_header(View view)
     {
 
+        LinearLayout ll_header_main= (LinearLayout) view.findViewById(R.id.ll_header_main);
         TextView txt_header= (TextView) view.findViewById(R.id.txt_header);
+
+        ll_header_main.setBackground(new ColorDrawable(ANL_Constant_Data.colorCode));
+        txt_header.setTextColor(ANL_Constant_Data.colorCode_Text);
         txt_header.setText(getString(R.string.news_title));
 
         if(header_show==true)
         {
-            txt_header.setVisibility(TextView.VISIBLE);
+            ll_header_main.setVisibility(TextView.VISIBLE);
         }
         else
         {
-            txt_header.setVisibility(TextView.GONE);
+            ll_header_main.setVisibility(TextView.GONE);
         }
 
 
@@ -290,6 +299,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
             // for showing
             wp7progressBar.showProgressBar();
 
+           // String requestUrl = String.format(WebServicesURLs.Cricket_NEWS_URL_NEW_FULL,str_keyword,str_ned,str_gl,str_hl);
             String requestUrl = String.format(WebServicesURLs.Cricket_NEWS_URL_FULL,str_keyword,str_keyword,str_ned,str_gl,str_hl);
             Log.e("WebRequest_String requestUrl", " " + requestUrl);
 
@@ -669,6 +679,8 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
                                             Bundle bundle_data=new Bundle();
                                             bundle_data.putString("news_url",str_link);
                                             bundle_data.putString("news_title",str_title);
+                                            bundle_data.putBoolean(ANL_Constant_Data.Header_Show,header_show);
+
                                             Intent marketIntent = new Intent(getActivity(),News_Details_Activity.class);
                                             marketIntent.putExtras(bundle_data);
                                             getActivity().startActivity(marketIntent);

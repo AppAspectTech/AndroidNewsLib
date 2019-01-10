@@ -19,10 +19,14 @@ public class ANL_Constant_Data {
     // Tag used to cancel the request
     public static final String TAG_REQ_News = "TAG_REQ_News";
     public static final String News_keyword = "News_keyword";
-    public static final String News_Color_Code = "News_Color_Code";
+    public static final String News_Header_BG_Color = "News_Header_BG_Color";
+    public static final String News_Header_Text_Color = "News_Header_Text_Color";
     public static final String Header_Show = "Header_Show";
     public static int colorCode ;
+    public static int  colorCode_Text;
 
+    public static String str_colorCode ;
+    public static String  str_colorCode_Text;
     public static final SimpleDateFormat match_Date_format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
     public static final  SimpleDateFormat news_pubDate_format = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.US);
 
