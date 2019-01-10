@@ -545,6 +545,8 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
 
                                                     Date date= ANL_Constant_Data.news_pubDate_format.parse(rssFeedModel.pubDate);
                                                     rssFeedModel.pubDate=  ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.format(date);
+                                                    Log.e("rssFeedModel.pubDate ",rssFeedModel.pubDate+"");
+
                                                     rssFeed_list.add(rssFeedModel);
                                                 }
 
@@ -648,16 +650,16 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
         @Override
         public int getItemCount() {
 
-            //return rssFeedModelArrayList.size();
+            return rssFeedModelArrayList.size();
 
             // for add power by google in end
-            return rssFeedModelArrayList.size()+1;
+           // return rssFeedModelArrayList.size()+1;
         }
 
         @Override
         public int getItemViewType(int position)
         {
-            if(position==rssFeedModelArrayList.size())
+            if(position==rssFeedModelArrayList.size()-1)
             {
                 return 1;
             }
@@ -686,11 +688,24 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
                         holder1.txt_title.setTag(""+position);
                         holder1.txt_pubDate.setTag(""+position);
 
-                        Date date= ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.parse(rssFeedModel.pubDate);
-                        rssFeedModel.pubDate=  ANL_Constant_Data.news_pubDate_format_display.format(date);
+                        try
+                        {
+
+                            Log.e("onBindViewHolder rssFeedModel.pubDate ",""+rssFeedModel.pubDate);
+                            Date date= ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.parse(rssFeedModel.pubDate);
+                            String str_pubDate=  ANL_Constant_Data.news_pubDate_format_display.format(date);
+                            Log.e("onBindViewHolder str_pubDate ",""+str_pubDate);
+                            holder1.txt_pubDate.setText(str_pubDate);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.e("onBindViewHolder txt_pubDate ",""+e.toString());
+                        }
+
+
 
                         holder1.txt_title.setText(rssFeedModel.title);
-                        holder1.txt_pubDate.setText(rssFeedModel.pubDate);
+
 
                         try {
 
@@ -699,7 +714,7 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
                                 //holder1.img_news.setImageResource(R.drawable.icon_200x200);
 
                                 holder1.img_news.setImageResource(R.mipmap.news);
-                                holder1.img_news.setColorFilter(ANL_Constant_Data.colorCode, android.graphics.PorterDuff.Mode.SRC_ATOP);
+                                holder1.img_news.setColorFilter(ANL_Constant_Data.colorCode, android.graphics.PorterDuff.Mode.SRC_IN);
                                 //holder1.img_news.setImage
                             }
                             else
@@ -709,7 +724,7 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
                                 Log.e("onBindViewHolder rssFeedModel.img_url ",""+rssFeedModel.img_url);
                                 Picasso.get()
                                         .load(rssFeedModel.img_url)
-                                        .error(R.mipmap.arrow)
+                                        .error(R.mipmap.news)
                                         .into(holder1.img_news);
                             }
                         }
