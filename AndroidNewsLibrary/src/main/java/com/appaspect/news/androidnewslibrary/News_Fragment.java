@@ -250,20 +250,20 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
     public void  display_header(View view)
     {
 
-        LinearLayout ll_header_main= (LinearLayout) view.findViewById(R.id.ll_header_main);
-        TextView txt_header= (TextView) view.findViewById(R.id.txt_header);
+        LinearLayout ll_header_news= (LinearLayout) view.findViewById(R.id.ll_header_news);
+        TextView txt_header_news= (TextView) view.findViewById(R.id.txt_header_news);
 
-        ll_header_main.setBackground(new ColorDrawable(ANL_Constant_Data.colorCode));
-        txt_header.setTextColor(ANL_Constant_Data.colorCode_Text);
-        txt_header.setText(getString(R.string.news_title));
+        ll_header_news.setBackground(new ColorDrawable(ANL_Constant_Data.colorCode));
+        txt_header_news.setTextColor(ANL_Constant_Data.colorCode_Text);
+        txt_header_news.setText(getString(R.string.news_title));
 
         if(header_show==true)
         {
-            ll_header_main.setVisibility(TextView.VISIBLE);
+            ll_header_news.setVisibility(TextView.VISIBLE);
         }
         else
         {
-            ll_header_main.setVisibility(TextView.GONE);
+            ll_header_news.setVisibility(TextView.GONE);
         }
 
 

@@ -14,10 +14,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
+        <LinearLayout
+            android:id="@+id/ll_header_news"
+            android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/header_main" />
+            android:layout_height="@dimen/header_height"
+            android:orientation="vertical"
+            android:gravity="center|left">
+            <TextView
+                android:id="@+id/txt_header_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/news_title"
+                android:textAllCaps="true"
+                android:paddingLeft="@dimen/padding_10"
+                android:textAppearance="@style/MyCustomTabText"
+                android:textColor="@color/text_white_color" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtNoData"
