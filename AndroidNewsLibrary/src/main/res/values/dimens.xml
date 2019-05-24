@@ -21,7 +21,7 @@
     <dimen name="margin_15">15dp</dimen>
     <dimen name="margin_20">20dp</dimen>
     <dimen name="header_height">48dp</dimen>
-    <dimen name="img_row_left_size">68dip</dimen>
+    <dimen name="img_row_left_size">130dp</dimen>
     <dimen name="img_info_size">48dip</dimen>
     <dimen name="img_arrow_size">32dip</dimen>
     <dimen name="batsman_header_width_runs">30dip</dimen>

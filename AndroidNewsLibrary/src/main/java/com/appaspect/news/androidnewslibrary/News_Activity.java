@@ -531,6 +531,7 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
 
 
                                             Log.e("RssFeedModel items",items.size()+"");
+
                                             if(items.size()>0)
                                             {
                                                 for (int i = 0; i < items.size(); i++)
@@ -538,16 +539,20 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
                                                     RssFeedModel rssFeedModel=items.get(i);
                                                     Log.e("i ",i+"");
                                                     Log.e("title ",rssFeedModel.title+"");
-                                                    Log.e("link ",rssFeedModel.link+"");
-                                                    Log.e("pubDate ",rssFeedModel.pubDate+"");
-                                                    Log.e("description ",rssFeedModel.description+"");
-                                                    Log.e("img_url ",rssFeedModel.img_url+"");
+                                                 //   Log.e("link ",rssFeedModel.link+"");
+                                                 //   Log.e("pubDate ",rssFeedModel.pubDate+"");
+                                                   // Log.e("description ",rssFeedModel.description+"");
+                                                    // Log.e("img_url ",rssFeedModel.img_url+"");
 
-                                                    Date date= ANL_Constant_Data.news_pubDate_format.parse(rssFeedModel.pubDate);
-                                                    rssFeedModel.pubDate=  ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.format(date);
-                                                    Log.e("rssFeedModel.pubDate ",rssFeedModel.pubDate+"");
+                                                    if(!TextUtils.isEmpty(rssFeedModel.img_url))
+                                                    {
+                                                        Date date= ANL_Constant_Data.news_pubDate_format.parse(rssFeedModel.pubDate);
+                                                        rssFeedModel.pubDate=  ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.format(date);
+                                                        Log.e("rssFeedModel.pubDate ",rssFeedModel.pubDate+"");
 
-                                                    rssFeed_list.add(rssFeedModel);
+                                                        rssFeed_list.add(rssFeedModel);
+                                                    }
+
                                                 }
 
 
@@ -713,19 +718,37 @@ public class News_Activity extends AppCompatActivity implements  SwipeRefreshLay
                             {
                                 //holder1.img_news.setImageResource(R.drawable.icon_200x200);
 
-                                holder1.img_news.setImageResource(R.mipmap.news);
-                                holder1.img_news.setColorFilter(ANL_Constant_Data.colorCode, android.graphics.PorterDuff.Mode.SRC_IN);
+                                holder1.img_news.setImageResource(R.mipmap.news_placeholder);
                                 //holder1.img_news.setImage
                             }
                             else
                             {
-                                holder1.img_news.setColorFilter(ContextCompat.getColor(context, R.color.fully_transparent_color), android.graphics.PorterDuff.Mode.SRC_ATOP);
+                                try
+                                {
 
-                                Log.e("onBindViewHolder rssFeedModel.img_url ",""+rssFeedModel.img_url);
-                                Picasso.get()
-                                        .load(rssFeedModel.img_url)
-                                        .error(R.mipmap.news)
-                                        .into(holder1.img_news);
+                                    String str_img_url_full= rssFeedModel.img_url;
+                                    //Log.e("str_img_url_full "+position, " " + str_img_url_full);
+
+                                    String str_img_url=str_img_url_full.substring(0,str_img_url_full.lastIndexOf("="));
+
+                                    str_img_url=str_img_url+"=-w900";
+                                    Log.e("img_url "+position, " " + str_img_url);
+
+
+                                    Picasso.get()
+                                            .load(str_img_url)
+                                            .placeholder(R.mipmap.news_placeholder)
+                                            .error(R.mipmap.news_placeholder)
+                                            .into(holder1.img_news);
+
+                                }
+                                catch (Exception e)
+                                {
+
+                                    Log.e("Picasso ", "" + e.toString());
+                                    holder1.img_news.setImageResource(R.mipmap.news_placeholder);
+
+                                }
                             }
                         }
                         catch (Exception e)

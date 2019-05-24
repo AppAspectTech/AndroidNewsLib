@@ -423,7 +423,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
                                                     {
                                                         //img_url="";
                                                         img_url = xmlPullParser.getAttributeValue(null, "url");
-                                                        Log.e("imageURL",img_url);
+                                                        //Log.e("imageURL",img_url);
                                                         //imageURL = result_item;
                                                     }
 
@@ -466,22 +466,28 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
                                                     RssFeedModel rssFeedModel=items.get(i);
                                                     Log.e("i ",i+"");
                                                     Log.e("title ",rssFeedModel.title+"");
-                                                    Log.e("link ",rssFeedModel.link+"");
-                                                    Log.e("pubDate ",rssFeedModel.pubDate+"");
-                                                    Log.e("description ",rssFeedModel.description+"");
-                                                    Log.e("img_url ",rssFeedModel.img_url+"");
+                                                  //  Log.e("link ",rssFeedModel.link+"");
+                                                  //  Log.e("pubDate ",rssFeedModel.pubDate+"");
+                                                  //  Log.e("description ",rssFeedModel.description+"");
+                                                  //  Log.e("img_url ",rssFeedModel.img_url+"");
 
-                                                    Date date= ANL_Constant_Data.news_pubDate_format.parse(rssFeedModel.pubDate);
-                                                    rssFeedModel.pubDate=  ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.format(date);
-                                                    Log.e("rssFeedModel.pubDate ",rssFeedModel.pubDate+"");
-                                                    rssFeed_list.add(rssFeedModel);
+                                                    if(!TextUtils.isEmpty(rssFeedModel.img_url))
+                                                    {
+                                                        Date date= ANL_Constant_Data.news_pubDate_format.parse(rssFeedModel.pubDate);
+                                                        rssFeedModel.pubDate=  ANL_Constant_Data.news_pubDate_format_yyyy_mm_dd.format(date);
+                                                        Log.e("rssFeedModel.pubDate ",rssFeedModel.pubDate+"");
+                                                        rssFeed_list.add(rssFeedModel);
+                                                    }
+
+
                                                 }
 
 
                                             }
 
-                                            Log.e("Google imageURL",""+imageURL);
+                                           // Log.e("Google imageURL",""+imageURL);
                                         }
+
 
                                         Collections.sort(rssFeed_list, new Comparator<RssFeedModel>(){
                                             public int compare(RssFeedModel obj1, RssFeedModel obj2) {
@@ -649,20 +655,38 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
                             if(TextUtils.isEmpty(rssFeedModel.img_url))
                             {
                                 //holder1.img_news.setImageResource(R.drawable.icon_200x200);
+                                holder1.img_news.setImageResource(R.mipmap.news_placeholder);
 
-                                holder1.img_news.setImageResource(R.mipmap.news);
-                                holder1.img_news.setColorFilter(ANL_Constant_Data.colorCode, android.graphics.PorterDuff.Mode.SRC_IN);
                                 //holder1.img_news.setImage
                             }
                             else
                             {
-                                holder1.img_news.setColorFilter(ContextCompat.getColor(context, R.color.fully_transparent_color), android.graphics.PorterDuff.Mode.SRC_ATOP);
+                                try
+                                {
 
-                                Log.e("onBindViewHolder rssFeedModel.img_url ",""+rssFeedModel.img_url);
+                                    String str_img_url_full= rssFeedModel.img_url;
+                                    //Log.e("str_img_url_full "+position, " " + str_img_url_full);
+
+                                    String str_img_url=str_img_url_full.substring(0,str_img_url_full.lastIndexOf("="));
+
+                                    str_img_url=str_img_url+"=-w900";
+                                    Log.e("img_url "+position, " " + str_img_url);
+
+
                                 Picasso.get()
-                                        .load(rssFeedModel.img_url)
-                                        .error(R.mipmap.news)
+                                        .load(str_img_url)
+                                        .placeholder(R.mipmap.news_placeholder)
+                                        .error(R.mipmap.news_placeholder)
                                         .into(holder1.img_news);
+
+                                }
+                                catch (Exception e)
+                                {
+
+                                    Log.e("Picasso ", "" + e.toString());
+                                    holder1.img_news.setImageResource(R.mipmap.news_placeholder);
+
+                                }
                             }
                         }
                         catch (Exception e)
@@ -735,7 +759,8 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
             View itemView = null;
             if(viewType==0)
             {
-                if(rssFeedModelArrayList.get(viewType).title!=null && rssFeedModelArrayList.get(viewType).title.length()>0) {
+                if(rssFeedModelArrayList.get(viewType).title!=null && rssFeedModelArrayList.get(viewType).title.length()>0)
+                {
                     itemView = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.row_news_item, parent, false);
                 }
