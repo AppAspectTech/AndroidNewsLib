@@ -35,6 +35,10 @@ import com.android.volley.toolbox.Volley;
 import com.appaspect.news.androidnewslibrary.data.RssFeedModel;
 import com.appaspect.news.androidnewslibrary.networks.WebServicesURLs;
 import com.appaspect.news.androidnewslibrary.utils.ANL_Constant_Data;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -629,7 +633,7 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
 
                         RssFeedModel rssFeedModel=rssFeedModelArrayList.get(position);
 
-                        holder1.img_news.setTag(""+position);
+                        //holder1.img_news.setTag(""+position);
                         holder1.txt_title.setTag(""+position);
                         holder1.txt_pubDate.setTag(""+position);
 
@@ -672,12 +676,21 @@ public class News_Fragment extends Fragment implements View.OnClickListener,Swip
                                     str_img_url=str_img_url+"=-w900";
                                     Log.e("img_url "+position, " " + str_img_url);
 
+                                    RequestOptions options = new RequestOptions();
+                                    options.placeholder(R.mipmap.news_placeholder)
+                                            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                            .error(R.mipmap.news_placeholder);
 
-                                Picasso.get()
-                                        .load(str_img_url)
-                                        .placeholder(R.mipmap.news_placeholder)
-                                        .error(R.mipmap.news_placeholder)
-                                        .into(holder1.img_news);
+                                    Glide.with(getActivity())
+                                            .load(str_img_url)
+                                            .apply(options)
+                                            .into(holder1.img_news);
+
+//                                Picasso.get()
+//                                        .load(str_img_url)
+//                                        .placeholder(R.mipmap.news_placeholder)
+//                                        .error(R.mipmap.news_placeholder)
+//                                        .into(holder1.img_news);
 
                                 }
                                 catch (Exception e)
